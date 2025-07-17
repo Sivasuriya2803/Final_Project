@@ -1,0 +1,532 @@
+.dashboard-header-nav {
+  width: 100%;
+  background: #fff;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 1.2rem 0 1.2rem;
+  height: 70px;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.06);
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+  z-index: 10;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #222;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: 2.2rem;
+}
+
+.header-logo i {
+  color: #10b981;
+}
+
+.header-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.header-menu li {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 18px;
+  transition: background 0.18s, color 0.18s;
+  background: none;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+}
+
+.header-menu li.active, .header-menu li:hover {
+  background: #f3f4f6;
+  color: #10b981;
+}
+
+.header-menu li i {
+  color: #64748b;
+  font-size: 1.1rem;
+  transition: color 0.18s;
+}
+
+.header-menu li.active i, .header-menu li:hover i {
+  color: #10b981;
+}
+
+.header-spacer {
+  flex: 1 1 auto;
+}
+
+.logout-menu {
+  margin-left: auto;
+  gap: 0;
+}
+
+.logout-menu li {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+.logout-menu li.active, .logout-menu li:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.logout-menu li i {
+  color: #ef4444;
+}
+
+.logout-menu li.active i, .logout-menu li:hover i {
+  color: #b91c1c;
+}
+
+/* Officer Dashboard Distinct Style */
+.dashboard-main {
+  padding: 2.5rem 3.5rem;
+  min-width: 0;
+  background: linear-gradient(135deg, #f8fafc 60%, #e0ffe7 100%);
+  min-height: 100vh;
+}
+
+.section-header {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1b5e20;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  border-left: 6px solid #7c3aed;
+  padding-left: 1rem;
+  background: #e8f5e9;
+  border-radius: 0 18px 18px 0;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.06);
+}
+
+/* Card entry animation */
+@keyframes officerCardSlideIn {
+  from { opacity: 0; transform: translateX(40px) scale(0.98); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+.policy-card, .proposal-card, .vehicle-card {
+  animation: officerCardSlideIn 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  border-left: 6px solid #7c3aed;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #fff 80%, #fffbe7 100%);
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.10);
+}
+.policy-card:hover, .proposal-card:hover, .vehicle-card:hover {
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+  transform: translateY(-6px) scale(1.03);
+}
+
+.policy-title, .proposal-title, .vehicle-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1b5e20;
+  background: #e8f5e9;
+  padding: 0.7rem 1.2rem;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  text-align: center;
+  border-left: 4px solid #7c3aed;
+}
+
+/* Status Badges */
+.policy-status, .proposal-status span, .status-badge {
+  display: inline-block;
+  padding: 0.3rem 1.1rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #e0ffe7;
+  color: #1b5e20;
+  transition: background 0.3s, color 0.3s;
+}
+.policy-status.inactive, .proposal-status .rejected {
+  background: #ffe0e0;
+  color: #b71c1c;
+}
+.proposal-status .approved {
+  background: #c8e6c9;
+  color: #388e3c;
+}
+.proposal-status .pending {
+  background: #fff8e1;
+  color: #f57c00;
+}
+
+/* Table header and row effects */
+.mat-elevation-z8 table {
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+}
+.mat-elevation-z8 th.mat-header-cell {
+  background: linear-gradient(90deg, #1b5e20 80%, #7c3aed 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.mat-elevation-z8 tr.mat-row:nth-child(even) td {
+  background: #f1f8e9;
+}
+.mat-elevation-z8 tr.mat-row:hover td {
+  background: #ffe0b2;
+  transition: background 0.2s;
+}
+
+/* Distinct Buttons */
+.add-btn, .edit-btn, .deactivate-btn, .approve-btn, .reject-btn {
+  border: 2px solid #1b5e20;
+  background: linear-gradient(90deg, #fff, #e8f5e9 80%);
+  color: #1b5e20;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 0.5rem 1.3rem;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  transition: background 0.18s, color 0.18s, border 0.18s, transform 0.1s;
+}
+.add-btn:hover, .edit-btn:hover, .deactivate-btn:hover, .approve-btn:hover, .reject-btn:hover {
+  background: linear-gradient(90deg, #e8f5e9, #fffbe7 100%);
+  color: #ff9800;
+  border: 2px solid #7c3aed;
+  transform: scale(1.04);
+}
+
+/* Glow effect on button click */
+.add-btn:active, .edit-btn:active, .deactivate-btn:active, .approve-btn:active, .reject-btn:active {
+  box-shadow: 0 0 0 4px #ffe0b2;
+  transform: scale(0.97);
+}
+
+/* Modal distinct style */
+.modal {
+  background: linear-gradient(120deg, #fff, #e8f5e9 100%);
+  border-left: 6px solid #7c3aed;
+  border-radius: 12px;
+}
+
+/* Accent for Add/Edit Modal header */
+.modal h2 {
+  color: #1b5e20;
+  border-left: 4px solid #7c3aed;
+  padding-left: 0.7rem;
+  background: #e8f5e9;
+  border-radius: 0 10px 10px 0;
+}
+
+/* Misc */
+.addon-tag {
+  background: #fffbe7;
+  color: #7c3aed;
+  border-radius: 8px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.95rem;
+  margin-right: 0.4rem;
+  margin-bottom: 0.2rem;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.policy-list-container, .proposal-list-container, .vehicle-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.policy-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-width: 260px;
+  max-width: 320px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+  padding: 1.5rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.policy-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.policy-status, .policy-description, .policy-premium, .policy-addons {
+  font-size: 1rem;
+  color: #475569;
+}
+
+.proposal-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+  padding: 1.5rem 2rem;
+  min-width: 260px;
+  max-width: 320px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+.proposal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+.proposal-status {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+.proposal-status .approved {
+  color: #10b981;
+  font-weight: bold;
+}
+.proposal-status .rejected {
+  color: #ef4444;
+  font-weight: bold;
+}
+.proposal-status .pending {
+  color: #f59e42;
+  font-weight: bold;
+}
+.proposal-dates {
+  font-size: 0.97rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+.proposal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.approve-btn {
+  background: #10b981;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.approve-btn:hover {
+  background: #059669;
+}
+.reject-btn {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.reject-btn:hover {
+  background: #b91c1c;
+}
+
+/* Policy action buttons */
+.policy-actions {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 0.7rem;
+}
+.view-btn, .edit-btn, .deactivate-btn {
+  background: #f3f4f6;
+  color: #2563eb;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  font-size: 0.98rem;
+}
+.view-btn:hover {
+  background: #e0e7ff;
+  color: #1976d2;
+}
+.edit-btn {
+  color: #059669;
+}
+.edit-btn:hover {
+  background: #d1fae5;
+  color: #047857;
+}
+.deactivate-btn {
+  color: #ef4444;
+}
+.deactivate-btn:disabled {
+  background: #f3f4f6;
+  color: #bdbdbd;
+  cursor: not-allowed;
+}
+.deactivate-btn:not(:disabled):hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Modal styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 62, 80, 0.25);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 32px rgba(44, 62, 80, 0.18);
+  padding: 2rem 2.5rem;
+  min-width: 320px;
+  max-width: 95vw;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.modal h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  color: #2563eb;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.7rem;
+}
+.form-group label {
+  font-weight: 600;
+  color: #374151;
+}
+.form-group input,
+.form-group textarea {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f9fafb;
+  resize: none;
+}
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.policy-header-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.2rem;
+}
+.policy-header-row.left-align {
+  justify-content: flex-start;
+}
+
+.add-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.4rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background 0.18s;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+.add-btn:hover {
+  background: #1d4ed8;
+}
+
+.vehicle-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.vehicle-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+  padding: 1.5rem 2rem;
+  min-width: 260px;
+  max-width: 320px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.vehicle-card:hover {
+  box-shadow: 0 6px 24px rgba(44, 62, 80, 0.18);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.full-width-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.status-completed {
+  color: #fff;
+  background-color: #4caf50;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+mat-paginator {
+  margin-top: 8px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .dashboard-header-nav {
+    padding: 0 0.5rem 0 0.5rem;
+  }
+  .dashboard-main {
+    padding: 1.2rem 0.5rem;
+  }
+  .header-menu {
+    gap: 0.7rem;
+  }
+  .header-logo {
+    margin-right: 1rem;
+  }
+}

@@ -1,0 +1,85 @@
+<div class="register-container">
+  <div class="register-hero">
+    <div class="hero-icon">
+      <i class="fas fa-user-plus"></i>
+      <i class="fas fa-shield-alt register-icon"></i>
+    </div>
+    <div class="hero-title">Join AutoCare Insurance</div>
+    <div class="hero-desc">Create your account and get started with comprehensive auto protection</div>
+  </div>
+  
+  <div class="register-card">
+    <div class="register-title">Create Account</div>
+    <form class="register-form" (ngSubmit)="registerUser()">
+      <div class="form-row">
+        <div class="input-group">
+          <i class="fas fa-user input-icon"></i>
+          <input type="text" [(ngModel)]="registerData.username" name="username" placeholder="Username *" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-envelope input-icon"></i>
+          <input type="email" [(ngModel)]="registerData.email" name="email" placeholder="Email Address *" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-group">
+          <i class="fas fa-lock input-icon"></i>
+          <input type="password" [(ngModel)]="registerData.password" name="password" placeholder="Password *" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock input-icon"></i>
+          <input type="password" [(ngModel)]="registerData.confirmPassword" name="confirmPassword" placeholder="Confirm Password *" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-group">
+          <i class="fas fa-id-card input-icon"></i>
+          <input type="text" [(ngModel)]="registerData.name" name="name" placeholder="Full Name *" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-phone input-icon"></i>
+          <input type="tel" [(ngModel)]="registerData.phoneNumber" name="phoneNumber" placeholder="Phone Number" />
+        </div>
+      </div>
+
+      <div class="input-group full-width">
+        <i class="fas fa-map-marker-alt input-icon"></i>
+        <input type="text" [(ngModel)]="registerData.address" name="address" placeholder="Address" />
+      </div>
+
+      <div class="form-row">
+        <div class="input-group">
+          <i class="fas fa-calendar input-icon"></i>
+          <input type="date" [(ngModel)]="registerData.dob" name="dob" placeholder="Date of Birth" />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-id-badge input-icon"></i>
+          <input type="text" [(ngModel)]="registerData.aadhaarNumber" name="aadhaarNumber" placeholder="Aadhaar Number (12 digits)" maxlength="12" />
+        </div>
+      </div>
+
+      <div class="input-group full-width">
+        <i class="fas fa-credit-card input-icon"></i>
+        <input type="text" [(ngModel)]="registerData.panNumber" name="panNumber" placeholder="PAN Number (10 characters)" maxlength="10" />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="register-btn" [disabled]="isLoading">
+          <i class="fas" [class.fa-user-plus]="!isLoading" [class.fa-spinner]="isLoading" [class.fa-spin]="isLoading"></i>
+          {{ isLoading ? 'Creating Account...' : 'Create Account' }}
+        </button>
+        <button type="button" class="clear-btn" (click)="clearForm()">
+          <i class="fas fa-undo"></i>
+          Clear Form
+        </button>
+      </div>
+    </form>
+    
+    <div class="register-footer">
+      Already have an account? <a [routerLink]="['/user-login']" style="color:#2d9cdb;">Sign in here</a>
+    </div>
+  </div>
+</div>
+  

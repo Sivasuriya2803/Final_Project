@@ -1,0 +1,254 @@
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <div class="logo" style="cursor:pointer;" (click)="scrollToSection('home')">
+        <i class="fas fa-shield-alt"></i>
+        <span>AutoCare Insurance</span>
+      </div>
+    </div>
+          <ul class="nav-menu">
+        <li><a href="#home" class="nav-link" (click)="scrollToSection('home')">Home</a></li>
+        <li><a href="#about" class="nav-link" (click)="scrollToSection('about')">About Us</a></li>
+        <li><a href="#services" class="nav-link" (click)="scrollToSection('services')">Services</a></li>
+        <li><a href="#claims" class="nav-link" (click)="scrollToSection('claims')">Claims</a></li>
+        <li><a href="#contact" class="nav-link" (click)="scrollToSection('contact')">Contact</a></li>
+        <li><a href="#help" class="nav-link" (click)="scrollToSection('help')">Help</a></li>
+      </ul>
+    <div class="hamburger" (click)="toggleMobileMenu()">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="hero-container">
+    <div class="hero-content">
+      <h1 class="hero-title">Get The Best Automobile Insurance with AutoCare</h1>
+      <p class="hero-subtitle">Fast. Reliable. Trusted by Thousands.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" [routerLink]="['/user-login']">
+          <i class="fas fa-user"></i>
+          Customer Login
+        </button>
+        <button class="btn btn-secondary" [routerLink]="['/officer-login']">
+          <i class="fas fa-user-tie"></i>
+          Agent Login
+        </button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="car-illustration">
+        <i class="fas fa-car"></i>
+        <div class="shield-overlay">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="security-badges">
+    <div class="badge">
+      <i class="fas fa-lock"></i>
+      <span>SSL Secure</span>
+    </div>
+    <div class="badge">
+      <i class="fas fa-certificate"></i>
+      <span>ISO Certified</span>
+    </div>
+    <div class="badge">
+      <i class="fas fa-award"></i>
+      <span>Trusted Partner</span>
+    </div>
+  </div>
+</section>
+
+<!-- Login Options Section -->
+<section class="login-options">
+  <div class="container">
+    <h2 class="section-title">Choose Your Access</h2>
+    <div class="login-cards">
+      <div class="login-card">
+        <div class="card-icon">
+          <i class="fas fa-user"></i>
+        </div>
+        <h3>Customer Portal</h3>
+        <p>Renew policies, file claims, and view your coverage details</p>
+        <button class="card-btn" [routerLink]="['/user-login']">Customer Login</button>
+      </div>
+      <div class="login-card">
+        <div class="card-icon">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <h3>Agent Portal</h3>
+        <p>Manage customer policies and process applications</p>
+        <button class="card-btn" [routerLink]="['/officer-login']">Agent Login</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose AutoCare Section -->
+<section class="features" id="services">
+  <div class="container">
+    <h2 class="section-title">Why Choose AutoCare?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3>24/7 Claim Support</h3>
+        <p>Round-the-clock assistance for all your insurance needs</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-sync-alt"></i>
+        </div>
+        <h3>Easy Renewals</h3>
+        <p>Quick and hassle-free policy renewal process</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h3>Trusted Network</h3>
+        <p>Wide network of certified garages and service centers</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3>Instant Policy</h3>
+        <p>Get your policy issued instantly with digital documentation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Quote Section -->
+<section class="quick-quote">
+  <div class="container">
+    <div class="quote-card">
+      <h2>Get a Quick Insurance Quote</h2>
+      <p>Start your journey to comprehensive auto protection</p>
+      <form class="quote-form" (ngSubmit)="onSubmitQuote($event)">
+        <div class="form-row">
+          <input type="text" placeholder="Full Name" required>
+          <input type="email" placeholder="Email Address" required>
+        </div>
+        <div class="form-row">
+          <input type="tel" placeholder="Phone Number" required>
+          <select required>
+            <option value="">Select Vehicle Type</option>
+            <option value="sedan">Sedan</option>
+            <option value="suv">SUV</option>
+            <option value="hatchback">Hatchback</option>
+            <option value="truck">Truck</option>
+          </select>
+        </div>
+        <button type="submit" class="quote-btn">Get Free Quote</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p>"AutoCare made my claim process incredibly smooth. Their 24/7 support is amazing!"</p>
+        <div class="testimonial-author">
+          <strong>Sarah Johnson</strong>
+          <span>Premium Customer</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p>"The easiest insurance renewal I've ever experienced. Highly recommended!"</p>
+        <div class="testimonial-author">
+          <strong>Michael Chen</strong>
+          <span>Loyal Customer</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p>"Great coverage options and excellent customer service. AutoCare is my go-to choice."</p>
+        <div class="testimonial-author">
+          <strong>Emily Rodriguez</strong>
+          <span>New Customer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <i class="fas fa-shield-alt"></i>
+          <span>AutoCare Insurance</span>
+        </div>
+        <p>Secure Your Drive, Insure Your Peace of Mind.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+        <p><i class="fas fa-envelope"></i> info&#64;autocare.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Insurance Ave, City, State 12345</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#claims">Claims</a></li>
+          <li><a href="#help">Help Center</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Disclaimers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 AutoCare Insurance. All rights reserved.</p>
+    </div>
+  </div>
+</footer> 

@@ -1,0 +1,164 @@
+<div class="dashboard-header-nav">
+  <div class="header-logo" style="cursor:pointer;" (click)="setSection('policies')"><i class="fas fa-shield-alt"></i> Autocare</div>
+  <ul class="header-menu">
+    <li [class.active]="activeSection === 'policies'" (click)="setSection('policies')">
+      <i class="fas fa-file-invoice"></i> Policies
+    </li>
+    <li [class.active]="activeSection === 'proposals'" (click)="setSection('proposals')">
+      <i class="fas fa-file-signature"></i> Proposals
+    </li>
+    <li [class.active]="activeSection === 'vehicles'" (click)="setSection('vehicles')">
+      <i class="fas fa-car"></i> Vehicles
+    </li>
+    <li [class.active]="activeSection === 'payments'" (click)="setSection('payments')">
+      <i class="fas fa-credit-card"></i> Payments
+    </li>
+    <li (click)="viewProfile()">
+      <i class="fas fa-user-circle"></i> Profile
+    </li>
+  </ul>
+  <div class="header-spacer"></div>
+  <ul class="header-menu logout-menu">
+    <li (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </li>
+  </ul>
+</div>
+<main class="dashboard-main">
+  <div *ngIf="activeSection === 'policies'">
+    <div class="policy-header-row left-align">
+      <button class="add-btn" (click)="openAddModal()">+ Add Policy</button>
+    </div>
+    <div class="policy-list-container">
+      <div class="policy-card" *ngFor="let policy of policies">
+        <div class="policy-title">{{ policy.name }}</div>
+        <div class="policy-status" [ngClass]="{'inactive': !policy.isActive}">
+          {{ policy.isActive ? 'Active' : 'Inactive' }}
+        </div>
+        <div class="policy-description">{{ policy.description }}</div>
+        <div class="policy-premium">Base Premium: ₹{{ policy.basePremium | number:'1.2-2' }}</div>
+        <div class="policy-addons">
+          <span class="addon-tag" *ngFor="let addon of (policy.addOns ? policy.addOns.split(',') : [])">
+            {{ addon.trim() }}
+          </span>
+        </div>
+        <div class="policy-actions">
+          <button class="edit-btn" (click)="openEditModal(policy)">Edit</button>
+          <button class="deactivate-btn" [disabled]="!policy.isActive" (click)="deactivatePolicy(policy)">Deactivate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="activeSection === 'proposals'">
+    <h2>Proposals</h2>
+    <div class="proposal-list-container">
+      <div class="proposal-card" *ngFor="let proposal of proposals">
+        <div class="proposal-title">Proposal #{{ proposal.proposalId }}</div>
+        <div class="proposal-user">User ID: <span class="addon-tag">{{ proposal.userId }}</span></div>
+        <div class="proposal-status">Status: <span [ngClass]="{'approved': proposal.status === 'APPROVED', 'rejected': proposal.status === 'REJECTED', 'pending': proposal.status === 'PENDING'}">{{ proposal.status }}</span></div>
+        <div class="proposal-dates">
+          <span *ngIf="proposal.quoteGeneratedAt">Quote: {{ proposal.quoteGeneratedAt }}</span>
+        </div>
+        <div class="proposal-actions">
+          <button class="approve-btn" *ngIf="proposal.status !== 'QUOTE_GENERATED'" (click)="reviewProposal(proposal.proposalId, true)">Approve</button>
+          <button class="reject-btn" (click)="reviewProposal(proposal.proposalId, false)">Reject</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="activeSection === 'vehicles'">
+    <div class="vehicle-list-container">
+      <div class="vehicle-card" *ngFor="let vehicle of vehicles">
+        <div class="policy-title">
+          <i class="fas fa-car"></i>
+          {{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})
+        </div>
+        <div class="policy-status">
+          <i class="fas fa-cogs"></i>
+          Type: <span class="addon-tag">{{ vehicle.type }}</span>
+        </div>
+        <div class="policy-description">
+          <i class="fas fa-id-card"></i>
+          Registration #: <span class="addon-tag">{{ vehicle.registrationNumber }}</span>
+        </div>
+        <div class="policy-premium">
+          <i class="fas fa-hashtag"></i>
+          Vehicle ID: {{ vehicle.id }}
+        </div>
+        <div class="policy-addons">
+          <i class="fas fa-user"></i>
+          User ID: <span class="addon-tag">{{ vehicle.userId }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="activeSection === 'payments'">
+    <h2>Completed Payments</h2>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="paymentsDataSource" class="full-width-table">
+        <!-- Payment ID Column -->
+        <ng-container matColumnDef="paymentId">
+          <th mat-header-cell *matHeaderCellDef> Payment ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.paymentId}} </td>
+        </ng-container>
+        <!-- Proposal ID Column -->
+        <ng-container matColumnDef="proposalId">
+          <th mat-header-cell *matHeaderCellDef> Proposal ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.proposalId}} </td>
+        </ng-container>
+        <!-- Payment Amount Column -->
+        <ng-container matColumnDef="paymentAmount">
+          <th mat-header-cell *matHeaderCellDef> Amount </th>
+          <td mat-cell *matCellDef="let element"> {{element.paymentAmount | currency:'INR'}} </td>
+        </ng-container>
+        <!-- Payment Date Column -->
+        <ng-container matColumnDef="paymentDate">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.paymentDate | date:'short'}} </td>
+        </ng-container>
+        <!-- Payment Status Column -->
+        <ng-container matColumnDef="paymentStatus">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element">
+            <span [ngClass]="{'status-completed': element.paymentStatus === 'COMPLETED'}">
+              {{element.paymentStatus}}
+            </span>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="paymentDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: paymentDisplayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</main>
+<app-user-profile [visible]="showProfile" (close)="closeProfile()"></app-user-profile>
+
+<!-- Edit/Add Policy Modal -->
+<div class="modal-backdrop" *ngIf="editModalOpen">
+  <div class="modal">
+    <h2>{{ isAddMode ? 'Add New Policy' : 'Edit Policy' }}</h2>
+    <form (ngSubmit)="submitEditPolicy()" #editForm="ngForm">
+      <div class="form-group">
+        <label for="editName">Name</label>
+        <input id="editName" name="name" [(ngModel)]="editPolicyData.name" required />
+      </div>
+      <div class="form-group">
+        <label for="editDescription">Description</label>
+        <textarea id="editDescription" name="description" [(ngModel)]="editPolicyData.description" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="editBasePremium">Base Premium</label>
+        <input id="editBasePremium" name="basePremium" type="number" [(ngModel)]="editPolicyData.basePremium" required />
+      </div>
+      <div class="form-group">
+        <label for="editAddOns">Add-ons (comma separated)</label>
+        <input id="editAddOns" name="addOns" [(ngModel)]="editPolicyData.addOns" />
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="edit-btn" [disabled]="editForm.invalid">{{ isAddMode ? 'Add' : 'Save' }}</button>
+        <button type="button" class="deactivate-btn" (click)="closeEditModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

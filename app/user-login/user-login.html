@@ -1,0 +1,31 @@
+<div class="login-container">
+  <div class="login-hero">
+    <div class="hero-icon">
+      <i class="fas fa-car-side"></i>
+      <i class="fas fa-users family-icon"></i>
+    </div>
+    <div class="hero-title">Welcome, Policyholder!</div>
+    <div class="hero-desc">Access your AutoCare Insurance account</div>
+  </div>
+  
+  <div class="login-card">
+    <div class="login-title">Welcome Back</div>
+    <form class="login-form" (ngSubmit)="login()">
+      <div class="input-group">
+        <i class="fas fa-user input-icon"></i>
+        <input type="text" [(ngModel)]="username" name="username" placeholder="Username" required />
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock input-icon"></i>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required />
+      </div>
+      <button class="login-btn" type="submit">
+        <i class="fas fa-sign-in-alt"></i>
+        Sign In
+      </button>
+    </form>
+            <div class="login-footer">
+          New to Insurance? <a [routerLink]="['/register']" style="color:#2d9cdb;">Sign up now</a>
+        </div>
+  </div>
+</div>

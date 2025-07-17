@@ -1,0 +1,174 @@
+<div class="dashboard-header-nav">
+  <div class="header-logo" style="cursor:pointer;" (click)="setSection('policies')"><i class="fas fa-shield-alt"></i> Autocare</div>
+  <ul class="header-menu">
+    <li [class.active]="activeSection === 'policies'" (click)="setSection('policies')">
+      <i class="fas fa-file-invoice"></i> Policies
+    </li>
+    <li [class.active]="activeSection === 'proposals'" (click)="setSection('proposals')">
+      <i class="fas fa-file-signature"></i> Proposals
+    </li>
+    <li [class.active]="activeSection === 'payments'" (click)="setSection('payments')">
+      <i class="fas fa-credit-card"></i> Payments
+    </li>
+    <li [class.active]="activeSection === 'vehicles'" (click)="setSection('vehicles')">
+      <i class="fas fa-car"></i> Vehicles
+    </li>
+    <li (click)="viewProfile()">
+      <i class="fas fa-user-circle"></i> Profile
+    </li>
+  </ul>
+  <div class="header-spacer"></div>
+  <ul class="header-menu logout-menu">
+    <li (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </li>
+  </ul>
+</div>
+<main class="dashboard-main">
+  <div *ngIf="activeSection === 'policies'">
+    <div class="policy-list-container">
+      <div class="policy-card" *ngFor="let policy of policies">
+        <div class="policy-title">{{ policy.name }}</div>
+        <div class="policy-status" [ngClass]="{'inactive': !policy.isActive}">
+          {{ policy.isActive ? 'Active' : 'Inactive' }}
+        </div>
+        <div class="policy-description">{{ policy.description }}</div>
+        <div class="policy-premium">Base Premium: ₹{{ policy.basePremium | number:'1.2-2' }}</div>
+        <div class="policy-addons">
+          <span class="addon-tag" *ngFor="let addon of (policy.addOns ? policy.addOns.split(',') : [])">
+            {{ addon.trim() }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="activeSection === 'proposals'">
+    
+    <button class="add-proposal-btn" (click)="openAddProposal()">
+      <i class="fas fa-plus"></i> Add Proposal
+    </button>
+    <div class="proposal-list-container">
+      <div class="proposal-card" *ngFor="let proposal of proposals">
+        <div class="proposal-title">Proposal #{{ proposal.proposalId }}</div>
+        <div class="proposal-status">Status: {{ proposal.status }}</div>
+        <div class="proposal-date">Submitted: {{ proposal.submittedAt }}</div>
+        <div class="proposal-date">Quote Generated: {{ proposal.quoteGeneratedAt }}</div>
+      </div>
+    </div>
+    <div class="proposal-modal" *ngIf="showAddProposal">
+      <div class="proposal-modal-content">
+        <button class="close-btn" (click)="closeAddProposal()"><i class="fas fa-times"></i></button>
+        <h3>Add New Proposal</h3>
+        <form (ngSubmit)="submitProposal()" #proposalForm="ngForm">
+          <div class="form-group">
+            <label for="vehicleType">Vehicle Type</label>
+            <select id="vehicleType" name="vehicleType" [(ngModel)]="newProposal.vehicleType" required>
+              <option value="" disabled selected>Select vehicle type</option>
+              <option *ngFor="let t of vehicleTypes" [value]="t">{{ t }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="policyId">Policy ID</label>
+            <input id="policyId" name="policyId" type="number" [(ngModel)]="newProposal.policyId" required />
+          </div>
+          <button class="submit-btn" type="submit">Submit Proposal</button>
+        </form>
+      </div>
+      <div class="proposal-modal-backdrop" (click)="closeAddProposal()"></div>
+    </div>
+  </div>
+  <div *ngIf="activeSection === 'payments'">
+    <div class="payment-list-container">
+      <div class="payment-card" *ngFor="let quote of quoteGeneratedProposals">
+        <div class="payment-title">Quote #{{ quote.proposalId }}</div>
+        <div class="payment-status">Status: {{ quote.status }}</div>
+        <div class="payment-date">Submitted: {{ quote.submittedAt | date:'medium' }}</div>
+        <div class="payment-date">Quote Generated: {{ quote.quoteGeneratedAt | date:'medium' }}</div>
+        <div class="payment-actions">
+          <button class="pay-btn" (click)="makePayment(quote)">
+            <i class="fas fa-credit-card"></i> Make Payment
+          </button>
+          <button class="view-details-btn" (click)="viewQuoteDetails(quote)">
+            <i class="fas fa-eye"></i> View Details
+          </button>
+        </div>
+      </div>
+      <div *ngIf="quoteGeneratedProposals.length === 0" class="no-payments">
+        <i class="fas fa-credit-card"></i>
+        <p>No payment quotes available</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="activeSection === 'vehicles'">
+    <h2>Your Vehicles</h2>
+    <button class="add-proposal-btn" (click)="openAddVehicle()">
+      <i class="fas fa-plus"></i> Add Vehicle
+    </button>
+    <div class="vehicle-list-container">
+      <div class="vehicle-card" *ngFor="let vehicle of vehicles">
+        <div class="vehicle-title">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</div>
+        <div class="vehicle-type">Type: {{ vehicle.type }}</div>
+        <div class="vehicle-reg">Registration #: {{ vehicle.registrationNumber }}</div>
+        <div class="vehicle-id">Vehicle ID: {{ vehicle.id }}</div>
+      </div>
+    </div>
+    <div class="proposal-modal" *ngIf="showAddVehicle">
+      <div class="proposal-modal-content">
+        <button class="close-btn" (click)="closeAddVehicle()"><i class="fas fa-times"></i></button>
+        <h3>Add New Vehicle</h3>
+        <form (ngSubmit)="registerVehicle()" #vehicleForm="ngForm">
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type" name="type" [(ngModel)]="newVehicle.type" required>
+              <option value="" disabled selected>Select type</option>
+              <option *ngFor="let t of vehicleTypes" [value]="t">{{ t }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="make">Make</label>
+            <input id="make" name="make" type="text" [(ngModel)]="newVehicle.make" required />
+          </div>
+          <div class="form-group">
+            <label for="model">Model</label>
+            <input id="model" name="model" type="text" [(ngModel)]="newVehicle.model" required />
+          </div>
+          <div class="form-group">
+            <label for="year">Year</label>
+            <input id="year" name="year" type="number" [(ngModel)]="newVehicle.year" required min="1900" max="{{ maxVehicleYear }}" />
+          </div>
+          <div class="form-group">
+            <label for="registrationNumber">Registration #</label>
+            <input id="registrationNumber" name="registrationNumber" type="text" [(ngModel)]="newVehicle.registrationNumber" required />
+          </div>
+          <button class="submit-btn" type="submit">Add Vehicle</button>
+        </form>
+      </div>
+      <div class="proposal-modal-backdrop" (click)="closeAddVehicle()"></div>
+    </div>
+  </div>
+</main>
+<app-user-profile [visible]="showProfile" (close)="closeProfile()"></app-user-profile>
+<div *ngIf="paymentModalOpen" class="modal-overlay">
+  <div class="modal-dialog">
+    <button class="modal-close" (click)="closePaymentModal()">&times;</button>
+    <h3>Confirm Payment</h3>
+    <div *ngIf="paymentModalQuote">
+      <p><strong>Proposal #:</strong> {{ paymentModalQuote.proposalId }}</p>
+      <p><strong>Status:</strong> {{ paymentModalQuote.status }}</p>
+      <p><strong>Submitted:</strong> {{ paymentModalQuote.submittedAt | date:'medium' }}</p>
+      <p><strong>Quote Generated:</strong> {{ paymentModalQuote.quoteGeneratedAt | date:'medium' }}</p>
+    </div>
+    <div *ngIf="paymentModalAmount !== null">
+      <p class="modal-amount">Premium Amount: <span>₹{{ paymentModalAmount }}</span></p>
+    </div>
+    <div *ngIf="paymentError" class="modal-error">{{ paymentError }}</div>
+    <div class="modal-actions">
+      <button class="confirm-btn" [disabled]="paymentProcessing || paymentModalAmount === null" (click)="confirmPayment()">
+        <span *ngIf="!paymentProcessing">Confirm Payment</span>
+        <span *ngIf="paymentProcessing">Processing...</span>
+      </button>
+      <button class="cancel-btn" [disabled]="paymentProcessing" (click)="closePaymentModal()">Cancel</button>
+    </div>
+  </div>
+  <div class="modal-backdrop" (click)="closePaymentModal()"></div>
+</div>

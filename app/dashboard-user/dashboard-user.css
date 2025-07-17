@@ -1,0 +1,883 @@
+.policy-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 0;
+  background: #f8fafc;
+}
+
+.policy-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.policy-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.16);
+}
+
+.policy-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+
+.policy-description {
+  color: #64748b;
+  font-size: 1rem;
+  max-height: 4.5em;
+  overflow: auto;
+  margin-bottom: 0.5rem;
+}
+
+.policy-premium {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #10b981;
+  margin-bottom: 0.5rem;
+}
+
+.policy-addons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.addon-tag {
+  background: #e0e7ff;
+  color: #3730a3;
+  border-radius: 12px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.policy-status {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: #d1fae5;
+  color: #059669;
+}
+
+.policy-status.inactive {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.5rem 2rem 0 2rem;
+  gap: 1.5rem;
+}
+
+.logo {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #2563eb;
+  letter-spacing: 1px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-right: 2rem;
+}
+
+.header-spacer {
+  flex: 1 1 auto;
+}
+
+.profile-dropdown {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.profile-name {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2563eb;
+  background: #f1f5ff;
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  transition: background 0.2s;
+}
+
+.profile-dropdown.open .profile-name,
+.profile-name:hover {
+  background: #e0e7ff;
+}
+
+.profile-name i.fa-user-circle {
+  font-size: 1.4rem;
+  color: #10b981;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.12);
+  min-width: 160px;
+  z-index: 10;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+  padding: 0.7rem 1.5rem;
+  color: #2563eb;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #e0e7ff;
+  color: #10b981;
+}
+
+.welcome-msg {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #10b981;
+  margin-right: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.logout-btn {
+  background: linear-gradient(90deg, #ef4444, #f59e42);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.08);
+  transition: background 0.2s, transform 0.2s;
+}
+.logout-btn:hover {
+  background: linear-gradient(90deg, #f59e42, #ef4444);
+  transform: translateY(-2px) scale(1.04);
+}
+
+@media (max-width: 900px) {
+  .policy-list-container {
+    gap: 1.2rem;
+  }
+  .policy-card {
+    width: 100%;
+    max-width: 95vw;
+  }
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.dashboard-header-nav {
+  width: 100%;
+  background: #fff;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 1.2rem 0 1.2rem;
+  height: 70px;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.06);
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+  z-index: 10;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #222;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: 2.2rem;
+}
+
+.header-logo i {
+  color: #10b981;
+}
+
+.header-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.header-menu li {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 18px;
+  transition: background 0.18s, color 0.18s;
+  background: none;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+}
+
+.header-menu li.active, .header-menu li:hover {
+  background: #f3f4f6;
+  color: #10b981;
+}
+
+.header-menu li i {
+  color: #64748b;
+  font-size: 1.1rem;
+  transition: color 0.18s;
+}
+
+.header-menu li.active i, .header-menu li:hover i {
+  color: #10b981;
+}
+
+.dashboard-main {
+  padding: 2.5rem 3.5rem;
+  min-width: 0;
+}
+
+/* Remove sidebar styles from previous version */
+.dashboard-layout, .dashboard-sidebar, .sidebar-logo, .sidebar-menu {
+  display: none !important;
+}
+
+.proposal-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 0;
+  background: #f8fafc;
+}
+
+.proposal-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.proposal-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.16);
+}
+
+.proposal-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2563eb;
+  background: #e0e7ff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.proposal-status {
+  font-size: 1rem;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.proposal-date {
+  font-size: 0.98rem;
+  color: #64748b;
+}
+
+@media (max-width: 900px) {
+  .dashboard-header-nav {
+    padding: 0 0.5rem 0 0.5rem;
+  }
+  .dashboard-main {
+    padding: 1.2rem 0.5rem;
+  }
+  .header-menu {
+    gap: 0.7rem;
+  }
+  .header-logo {
+    margin-right: 1rem;
+  }
+}
+
+.logout-menu {
+  margin-left: auto;
+  gap: 0;
+}
+
+.logout-menu li {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+.logout-menu li.active, .logout-menu li:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.logout-menu li i {
+  color: #ef4444;
+}
+
+.logout-menu li.active i, .logout-menu li:hover i {
+  color: #b91c1c;
+}
+
+.add-proposal-btn {
+  background: #10b981;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.3rem;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.08);
+  transition: background 0.18s, transform 0.18s;
+}
+.add-proposal-btn:hover {
+  background: #059669;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.proposal-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proposal-modal-backdrop {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30, 41, 59, 0.45);
+  z-index: 1;
+}
+
+.proposal-modal-content {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+  padding: 2.2rem 2.5rem 2rem 2.5rem;
+  min-width: 320px;
+  max-width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: #64748b;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 3;
+}
+.close-btn:hover {
+  color: #ef4444;
+}
+
+.proposal-modal-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1.1rem;
+  width: 100%;
+}
+.form-group label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 1rem;
+}
+.form-group input {
+  padding: 0.5rem 1rem;
+  border-radius: 7px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.18s;
+}
+.form-group input:focus {
+  border: 1.5px solid #2563eb;
+}
+.submit-btn {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.18s, transform 0.18s;
+}
+.submit-btn:hover {
+  background: #1e40af;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.vehicle-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.vehicle-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+  padding: 1.5rem 2rem;
+  min-width: 260px;
+  max-width: 320px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.vehicle-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2563eb;
+  background: #e0e7ff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.vehicle-type, .vehicle-reg, .vehicle-id {
+  font-size: 1rem;
+  color: #475569;
+}
+
+/* Vehicle add form styles (like proposal modal) */
+.vehicles-form-section {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+  padding: 2.2rem 2.5rem 2rem 2.5rem;
+  margin-bottom: 2rem;
+  max-width: 420px;
+}
+
+.vehicles-form-section label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 1rem;
+  margin-top: 0.7rem;
+  display: block;
+}
+
+.vehicles-form-section input,
+.vehicles-form-section select {
+  padding: 0.5rem 1rem;
+  border-radius: 7px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 0.7rem;
+  width: 100%;
+  transition: border 0.18s;
+  background: #f8fafc;
+}
+.vehicles-form-section input:focus,
+.vehicles-form-section select:focus {
+  border: 1.5px solid #2563eb;
+}
+
+.vehicles-form-section button[type="submit"] {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.18s, transform 0.18s;
+}
+.vehicles-form-section button[type="submit"]:hover {
+  background: #1e40af;
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* Fix select box for type */
+.vehicles-form-section select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%2364748b" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7.293 7.293a1 1 0 011.414 0L10 8.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.2em;
+}
+
+/* Payments Section Styles */
+.payment-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 0;
+  background: #f8fafc;
+}
+
+.payment-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  border-left: 4px solid #10b981;
+}
+
+.payment-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.16);
+}
+
+.payment-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+
+.payment-status {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #10b981;
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.9rem;
+  background: #d1fae5;
+  border-radius: 12px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.payment-date {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.payment-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pay-btn, .view-details-btn {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.pay-btn {
+  background: linear-gradient(90deg, #10b981, #059669);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+.pay-btn:hover {
+  background: linear-gradient(90deg, #059669, #047857);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.view-details-btn {
+  background: #f1f5f9;
+  color: #475569;
+  border: 2px solid #e2e8f0;
+}
+
+.view-details-btn:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+  border-color: #cbd5e1;
+}
+
+.no-payments {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #64748b;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.no-payments i {
+  font-size: 3rem;
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.no-payments p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .payment-list-container {
+    padding: 1rem;
+  }
+  
+  .payment-card {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .payment-actions {
+    flex-direction: column;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1001;
+}
+.modal-dialog {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  padding: 2rem 2.5rem 1.5rem 2.5rem;
+  z-index: 1002;
+  min-width: 340px;
+  max-width: 95vw;
+  animation: modalFadeIn 0.2s;
+}
+@keyframes modalFadeIn {
+  from { transform: translateY(40px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+.modal-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.modal-close:hover {
+  color: #e74c3c;
+}
+.modal-dialog h3 {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
+  color: #222;
+}
+.modal-amount {
+  font-size: 1.15rem;
+  margin: 1rem 0 1.5rem 0;
+}
+.modal-amount span {
+  color: #2ecc71;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+.confirm-btn, .cancel-btn {
+  padding: 0.5rem 1.3rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.confirm-btn {
+  background: #2ecc71;
+  color: #fff;
+}
+.confirm-btn:disabled {
+  background: #b2f0c0;
+  color: #fff;
+  cursor: not-allowed;
+}
+.cancel-btn {
+  background: #eee;
+  color: #444;
+}
+.cancel-btn:disabled {
+  background: #f5f5f5;
+  color: #aaa;
+  cursor: not-allowed;
+}
+.modal-error {
+  color: #e74c3c;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.98rem;
+  text-align: center;
+}
+
+.form-group select {
+  padding: 0.5rem 1rem;
+  border-radius: 7px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.18s;
+  background: #f8fafc;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%2364748b" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7.293 7.293a1 1 0 011.414 0L10 8.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.2em;
+}
+.form-group select:focus {
+  border: 1.5px solid #2563eb;
+}
+
+/* Card entry animation */
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.policy-card, .proposal-card, .vehicle-card, .payment-card {
+  animation: cardFadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Status badge color transition */
+.status-badge {
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Button click animation */
+.submit-btn, .add-proposal-btn, .close-btn {
+  transition: transform 0.1s;
+}
+.submit-btn:active, .add-proposal-btn:active, .close-btn:active {
+  transform: scale(0.96);
+}

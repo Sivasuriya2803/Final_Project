@@ -1,0 +1,31 @@
+<div class="login-container">
+  <div class="login-hero">
+    <div class="hero-icon">
+      <i class="fas fa-user-tie"></i>
+      <i class="fas fa-clipboard-list agent-icon"></i>
+    </div>
+    <div class="hero-title">Agent Portal</div>
+    <div class="hero-desc">For authorized insurance agents only</div>
+  </div>
+  
+  <div class="login-card">
+    <div class="login-title">Agent Sign In</div>
+    <form class="login-form" (ngSubmit)="login()">
+      <div class="input-group">
+        <i class="fas fa-user input-icon"></i>
+        <input type="text" [(ngModel)]="username" name="username" placeholder="Username" required />
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock input-icon"></i>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required />
+      </div>
+      <button class="login-btn" type="submit">
+        <i class="fas fa-sign-in-alt"></i>
+        Sign In
+      </button>
+    </form>
+    <div class="login-footer">
+      Agent access only.
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="profile-modal" *ngIf="visible">
+  <div class="profile-content">
+    <button class="close-btn" (click)="onClose()"><i class="fas fa-times"></i></button>
+    <h2><i class="fas fa-user-circle"></i> User Profile</h2>
+    <div *ngIf="loading" class="profile-loading">Loading...</div>
+    <div *ngIf="error" class="profile-error">{{ error }}</div>
+    <div *ngIf="profile && !loading && !error" class="profile-fields">
+      <div class="profile-row"><span class="profile-label">ID:</span> <span>{{ profile.id }}</span></div>
+      <div class="profile-row"><span class="profile-label">Username:</span> <span>{{ profile.username }}</span></div>
+      <div class="profile-row"><span class="profile-label">Email:</span> <span>{{ profile.email }}</span></div>
+      <div class="profile-row"><span class="profile-label">Name:</span> <span>{{ profile.name }}</span></div>
+      <div class="profile-row"><span class="profile-label">Address:</span> <span>{{ profile.address }}</span></div>
+      <div class="profile-row"><span class="profile-label">Date of Birth:</span> <span>{{ profile.dob }}</span></div>
+      <div class="profile-row"><span class="profile-label">Aadhaar Number:</span> <span>{{ profile.aadhaarNumber }}</span></div>
+      <div class="profile-row"><span class="profile-label">PAN Number:</span> <span>{{ profile.panNumber }}</span></div>
+    </div>
+  </div>
+  <div class="profile-backdrop" (click)="onClose()"></div>
+</div> 
